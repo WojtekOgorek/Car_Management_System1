@@ -6,7 +6,12 @@
 
     <groupId>ogorek.wojciech</groupId>
     <artifactId>Car_Management_System1</artifactId>
-    <version>${version}</version>
+    <version>${revision}</version>
+    <modules>
+        <module>persistence</module>
+        <module>service</module>
+        <module>ui</module>
+    </modules>
 
     <packaging>pom</packaging>
 
