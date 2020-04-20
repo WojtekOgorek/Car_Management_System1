@@ -4,9 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import ogorek.wojciech.persistance.exception.JsonAppException;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.Optional;
 
 public abstract class JsonConverter<T> {
 
@@ -25,7 +27,15 @@ public abstract class JsonConverter<T> {
             }
             gson.toJson(element, filewriter);
         }catch(Exception e){
-            throw new JsonAppException("to json exception" + e.getMessage());
+            throw new JsonAppException("to json exception " + e.getMessage());
+        }
+    }
+
+    public Optional<T> fromJson(){
+        try(FileReader fileReader = new FileReader(jsonFilename) ){
+            return Optional.of(gson.fromJson(fileReader, type));
+        }catch(Exception e){
+            throw new JsonAppException("from json exception " + e.getMessage());
         }
     }
 }
