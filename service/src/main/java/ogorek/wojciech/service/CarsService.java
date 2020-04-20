@@ -2,14 +2,17 @@ package ogorek.wojciech.service;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import ogorek.wojciech.persistance.exception.AppException;
 import ogorek.wojciech.persistance.exception.JsonAppException;
 import ogorek.wojciech.persistance.model.Car;
+import ogorek.wojciech.persistance.model.enums.SortItem;
 import ogorek.wojciech.persistance.repository.CarsConverter;
 import ogorek.wojciech.persistance.validator.impl.CarValidator;
 
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CarsService {
 
@@ -46,4 +49,27 @@ public class CarsService {
                 .map(gson::toJson)
                 .collect(Collectors.joining("\n"));
     }
+
+    //method 1. Sort Car by COLOR, MILEAGE, MODEL -> descending or ascending
+
+    public List<Car> sort (SortItem sortItem, boolean descending) {
+
+        if(sortItem == null){
+            throw new AppException("sort item object is null");
+        }
+
+        Stream<Car> carStream = switch (sortItem){
+            case COLOR -> cars.stream().sorted(Comparator.comparing(Car::getColor));
+            case MILEAGE -> cars.stream().sorted(Comparator.comparing(Car::getMileage));
+            case MODEL -> cars.stream().sorted(Comparator.comparing(Car::getModel));
+            default -> cars.stream().sorted(Comparator.comparing(Car::getPrice));
+        };
+
+        List<Car> sortedCars = carStream.collect(Collectors.toList());
+        if(descending){
+            Collections.reverse(sortedCars);
+        }
+        return sortedCars;
+    }
+
 }

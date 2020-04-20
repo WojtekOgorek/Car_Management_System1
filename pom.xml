@@ -30,7 +30,7 @@
         <eclipse.version>10.2.0</eclipse.version>
 
         <!-- plugins settings -->
-        <flatten.maven.plugin.version>1.1.0</flatten.maven.plugin.version>
+        <maven.flatten.plugin.version>1.1.0</maven.flatten.plugin.version>
         <maven.enforcer.plugin.version>3.0.0-M3</maven.enforcer.plugin.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
         <maven.resources.plugin.version>3.1.0</maven.resources.plugin.version>
@@ -63,7 +63,7 @@
                 <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>flatten-maven-plugin</artifactId>
-                    <version>${flatten.maven.plugin.version}</version>
+                    <version>${maven.flatten.plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

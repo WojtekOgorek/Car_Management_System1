@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ogorek.wojciech.persistance.model.enums.Color;
 
 import java.math.BigDecimal;
 import java.util.Set;

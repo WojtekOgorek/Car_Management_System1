@@ -1,7 +1,7 @@
 package ogorek.wojciech.persistance.validator.impl;
 
 import ogorek.wojciech.persistance.model.Car;
-import ogorek.wojciech.persistance.model.Color;
+import ogorek.wojciech.persistance.model.enums.Color;
 import ogorek.wojciech.persistance.validator.generic.AbstractValidator;
 
 import java.math.BigDecimal;
