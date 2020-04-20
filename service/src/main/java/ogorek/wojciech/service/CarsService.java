@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import ogorek.wojciech.persistance.exception.AppException;
 import ogorek.wojciech.persistance.exception.JsonAppException;
 import ogorek.wojciech.persistance.model.Car;
+import ogorek.wojciech.persistance.model.enums.Color;
 import ogorek.wojciech.persistance.model.enums.SortItem;
 import ogorek.wojciech.persistance.repository.CarsConverter;
 import ogorek.wojciech.persistance.validator.impl.CarValidator;
@@ -71,5 +72,33 @@ public class CarsService {
         }
         return sortedCars;
     }
+
+    //method 2. Get all cars with mileage grater than given argument.
+
+    public List<Car> getAllWithMileageGreaterThan(double mileage){
+
+        if(mileage < 0){
+            throw new AppException("mileage value is not correct " + mileage);
+        }
+
+        return cars
+                .stream()
+                .filter(car -> car.getMileage() > mileage)
+                .collect(Collectors.toList());
+    }
+
+    //method 3. Count cars by colors.
+
+    public Map<Color, Long> countCarsByColors(){
+        return
+                cars
+                .stream()
+                .collect(Collectors.groupingBy(Car::getColor, Collectors.counting()))
+                .entrySet()
+                .stream()
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Long::max, LinkedHashMap::new));
+
+    }
+
 
 }

@@ -1,5 +1,6 @@
 package ogorek.wojciech.service.utils;
 
+import lombok.experimental.UtilityClass;
 import ogorek.wojciech.persistance.exception.AppException;
 import ogorek.wojciech.persistance.model.enums.SortItem;
 
@@ -7,6 +8,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
+@UtilityClass
 public class UsedDataService {
 
     private Scanner scanner = new Scanner(System.in);
@@ -20,8 +22,16 @@ public class UsedDataService {
             throw new AppException("value must be integer");
         }
         return Integer.parseInt(value);
+    }
 
+    public double getDouble(String message){
+        System.out.println(message);
 
+        String value = scanner.nextLine();
+        if(!value.matches("\\d+\\.\\d+")){
+            throw new AppException("value must be double");
+        }
+        return Double.parseDouble(value);
     }
 
     public boolean getBoolean(String message){
