@@ -145,6 +145,43 @@ public class CarsService {
                 .collect(Collectors.toList());
 
     }
+    //method 6. Map - key is the car model and value is the most valuable car by this model.
+    //sorted descending by key
+
+    public Map<String, List<Car>> highestPriceCarModel(){
+
+        return cars
+                .stream()
+                .collect(Collectors.groupingBy(Car::getModel))
+                .entrySet()
+                .stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        v -> v.getValue()
+                        .stream()
+                        .collect(Collectors.groupingBy(Car::getPrice))
+                        .entrySet()
+                                .stream()
+                        .max(Comparator.comparing(Map.Entry::getKey))
+                        .orElseThrow()
+                        .getValue()
+                ));
+    }
+
+    //method 7. Method returns car with the highest price. If there are more than one
+    //highest priced cars it returns collection of those
+
+    public List<Car> highestPricedCar(){
+
+        Car highestPricedCar = cars
+                .stream()
+                .max((p1,p2) -> p1.getPrice().compareTo(p2.getPrice()))
+                .orElse(null);
+
+        return cars.stream()
+                .filter(car -> car.getPrice() == highestPricedCar.getPrice())
+                .collect(Collectors.toList());
+    }
 
 
 }
