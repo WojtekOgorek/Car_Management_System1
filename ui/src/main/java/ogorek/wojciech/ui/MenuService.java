@@ -3,6 +3,7 @@ package ogorek.wojciech.ui;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import lombok.RequiredArgsConstructor;
+import ogorek.wojciech.persistance.data.Statistics;
 import ogorek.wojciech.persistance.exception.AppException;
 import ogorek.wojciech.persistance.model.Car;
 import ogorek.wojciech.persistance.model.enums.Color;
