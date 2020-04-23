@@ -63,7 +63,7 @@
                             <outputDirectory>${basedir}/target/resources</outputDirectory>
                             <resources>
                                 <resource>
-                                    <dircetory>${basedir}/src/main/resources</dircetory>
+                                    <directory>${basedir}/src/main/resources</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>

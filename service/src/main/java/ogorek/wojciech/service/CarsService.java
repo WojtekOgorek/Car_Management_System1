@@ -17,6 +17,7 @@ import org.eclipse.collections.impl.collector.Collectors2;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -181,6 +182,38 @@ public class CarsService {
         return cars.stream()
                 .filter(car -> car.getPrice() == highestPricedCar.getPrice())
                 .collect(Collectors.toList());
+    }
+
+    //method 8. Method return map where key is car component and value is car collection that
+    //contain those components. Map is sorted descending by value
+
+    public Map<String, List<Car>> carWithSameComponents(){
+
+        return cars
+                .stream()
+                .flatMap(car -> car.getComponents().stream())
+                .distinct()
+                .collect(Collectors.toMap(Function.identity(), component-> cars
+                .stream()
+                .filter(car -> car.getComponents().contains(component))
+                        .collect(Collectors.toList())));
+    }
+
+
+    //method 9. Method return car collection which price fits in the selected range <a, b>.
+    //Collection is sorted alphabetically
+
+    public List<Car> carsPriceRange(int a, int b){
+        if(a < 0 || b < 0 || a > b){
+            throw new AppException("carsPriceRange arguments are invalid");
+        }
+
+        return cars
+                .stream()
+                .filter(car -> car.getPrice().compareTo(BigDecimal.valueOf(a)) > 0
+                && car.getPrice().compareTo(BigDecimal.valueOf(b)) < 0)
+        .collect(Collectors.toList());
+
     }
 
 
