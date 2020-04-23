@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @UtilityClass
-public class UsedDataService {
+public class UserDataService {
 
     private Scanner scanner = new Scanner(System.in);
 
