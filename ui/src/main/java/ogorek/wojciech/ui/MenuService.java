@@ -1,9 +1,18 @@
 package ogorek.wojciech.ui;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import lombok.RequiredArgsConstructor;
 import ogorek.wojciech.persistance.exception.AppException;
+import ogorek.wojciech.persistance.model.Car;
+import ogorek.wojciech.persistance.model.enums.Color;
+import ogorek.wojciech.persistance.model.enums.SortItem;
 import ogorek.wojciech.service.CarsService;
 import ogorek.wojciech.service.utils.UserDataService;
+
+import java.awt.*;
+import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 public class MenuService {
@@ -16,6 +25,15 @@ public class MenuService {
                 int option = chooseOptionFromMainMenu();
                     switch(option) {
                         case 1 -> option1();
+                        case 2 -> option2();
+                        case 3 -> option3();
+                        case 4 -> option4();
+                        case 5 -> option5();
+                        case 6 -> option6();
+                        case 7 -> option7();
+                        case 8 -> option8();
+                        case 9 -> option9();
+                        case 10 -> option10();
                         case 12 ->{
                                 UserDataService.close();
                         System.out.println("Have a nice day !");
@@ -48,7 +66,58 @@ public class MenuService {
 
     private void option1(){ System.out.println(carsService.toString());}
 
+    private void option2() {
+        SortItem sortItem = UserDataService.getSortItem();
+        boolean descending = UserDataService.getBoolean("Sort descending? Enter y / n");
+        List<Car> sortedCars = carsService.sort(sortItem, descending);
+        System.out.println(toJson(sortedCars));
+    }
 
+    private void option3(){
+        double mileage = UserDataService.getDouble("Type mileage");
+        List<Car> carsWithGraterMileage = carsService.getAllWithMileageGreaterThan(mileage);
+        System.out.println(toJson(carsWithGraterMileage));
+    }
+
+    private void option4(){
+        Map<Color, Long> countByColor = carsService.countCarsByColors();
+        System.out.println();
+    }
+
+    private void option5(){
+        Statistics statistics = carsService.summarizeMileageAndPrice();
+        System.out.println(toJson(statistics));
+    }
+
+    private void option6(){
+        List<Car> sortingComponents = carsService.sortCarComponents();
+        System.out.println(sortingComponents);
+    }
+
+    private void option7(){
+        Map<String, List<Car>> highestPriceCarModel = carsService.highestPriceCarModel();
+        System.out.println(toJson(highestPriceCarModel));
+    }
+    private void option8(){
+        List<Car> highestPricedCar = carsService.highestPricedCar();
+        System.out.println(toJson(highestPricedCar));
+    }
+    private void option9(){
+        Map<String, List<Car>> carsWithSameComponents = carsService.carWithSameComponents();
+        System.out.println(toJson(carsWithSameComponents));
+    }
+    private void option10(){
+        int a = UserDataService.getInt("Type the low price point: ");
+        int b = UserDataService.getInt("Type the high price point: ");
+        List<Car> selectedPriceRangeCars = carsService.carsPriceRange(a, b);
+        System.out.println(toJson(selectedPriceRangeCars));
+    }
+
+
+    private static <T> String toJson(T t){
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(t);
+    }
 
 
 }
