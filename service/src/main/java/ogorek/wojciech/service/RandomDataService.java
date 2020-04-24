@@ -1,3 +1,5 @@
+package ogorek.wojciech.service;
+
 import ogorek.wojciech.persistance.exception.AppException;
 
 import ogorek.wojciech.persistance.model.enums.Color;

@@ -8,10 +8,11 @@ import ogorek.wojciech.persistance.exception.AppException;
 import ogorek.wojciech.persistance.model.Car;
 import ogorek.wojciech.persistance.model.enums.Color;
 import ogorek.wojciech.persistance.model.enums.SortItem;
+import ogorek.wojciech.persistance.repository.CarsConverter;
 import ogorek.wojciech.service.CarsService;
+import ogorek.wojciech.service.DataGenerator;
 import ogorek.wojciech.service.utils.UserDataService;
 
-import java.awt.*;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import java.util.Map;
 public class MenuService {
 
     private final CarsService carsService;
+    private final DataGenerator dataGenerator;
 
     public void mainMenu(){
         while(true){
@@ -35,6 +37,7 @@ public class MenuService {
                         case 8 -> option8();
                         case 9 -> option9();
                         case 10 -> option10();
+                        case 11 -> option11();
                         case 12 ->{
                                 UserDataService.close();
                         System.out.println("Have a nice day !");
@@ -112,6 +115,15 @@ public class MenuService {
         int b = UserDataService.getInt("Type the high price point: ");
         List<Car> selectedPriceRangeCars = carsService.carsPriceRange(a, b);
         System.out.println(toJson(selectedPriceRangeCars));
+    }
+    private void option11(){
+        List<Car> cars = dataGenerator.createACar();
+
+        final String userJsonFile = "userCars.json";
+        CarsConverter carsConverter = new CarsConverter(userJsonFile);
+        carsConverter.toJson(cars);
+        carsConverter.fromJson().ifPresent(System.out::println);
+
     }
 
 

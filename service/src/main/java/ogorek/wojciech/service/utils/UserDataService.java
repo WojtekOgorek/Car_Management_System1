@@ -2,8 +2,10 @@ package ogorek.wojciech.service.utils;
 
 import lombok.experimental.UtilityClass;
 import ogorek.wojciech.persistance.exception.AppException;
+import ogorek.wojciech.persistance.model.enums.Color;
 import ogorek.wojciech.persistance.model.enums.SortItem;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -39,6 +41,21 @@ public class UserDataService {
         return scanner.nextLine().toLowerCase().equals("y");
     }
 
+    public String getString(String message){
+        System.out.println(message);
+        return scanner.nextLine();
+    }
+
+    public BigDecimal getBigDecimal(String message){
+        System.out.println(message);
+
+        String value = scanner.nextLine();
+        if(!value.matches("(\\d+\\.)?\\d+")){
+            throw new AppException("value must be BigDecimal");
+        }
+        return new BigDecimal(value);
+    }
+
     public SortItem getSortItem() {
         var counter = new AtomicInteger(1);
 
@@ -51,6 +68,20 @@ public class UserDataService {
         }
 
         return SortItem.values()[option - 1];
+    }
+
+    public Color getColor(String message){
+        System.out.println(message);
+
+        var counter = new AtomicInteger(1);
+        Arrays.stream(Color.values())
+                .forEach(color -> System.out.println(counter.getAndIncrement() + ". " + color));
+        var option = UserDataService.getInt("Pick color");
+        if(option < 1 || option > Color.values().length){
+            throw new AppException("invalid color option");
+        }
+
+        return Color.values()[option - 1];
     }
 
     public void close() {
