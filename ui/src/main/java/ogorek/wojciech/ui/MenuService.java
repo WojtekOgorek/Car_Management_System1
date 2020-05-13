@@ -20,7 +20,6 @@ import java.util.Map;
 public class MenuService {
 
     private final CarsService carsService;
-    private final DataGenerator dataGenerator;
 
     public void mainMenu(){
         while(true){
@@ -85,7 +84,7 @@ public class MenuService {
 
     private void option4(){
         Map<Color, Long> countByColor = carsService.countCarsByColors();
-        System.out.println();
+        System.out.println(toJson(countByColor));
     }
 
     private void option5(){
@@ -117,6 +116,7 @@ public class MenuService {
         System.out.println(toJson(selectedPriceRangeCars));
     }
     private void option11(){
+        DataGenerator dataGenerator = new DataGenerator();
         List<Car> cars = dataGenerator.createACar();
 
         final String userJsonFile = "userCars.json";
