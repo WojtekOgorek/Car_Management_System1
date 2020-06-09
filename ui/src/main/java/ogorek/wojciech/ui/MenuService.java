@@ -119,7 +119,7 @@ public class MenuService {
         DataGenerator dataGenerator = new DataGenerator();
         List<Car> cars = dataGenerator.createACar();
 
-        final String userJsonFile = "userCars.json";
+        final String userJsonFile = "data/userCars.json";
         CarsConverter carsConverter = new CarsConverter(userJsonFile);
         carsConverter.toJson(cars);
         carsConverter.fromJson().ifPresent(System.out::println);

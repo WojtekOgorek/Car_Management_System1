@@ -5,9 +5,10 @@ import ogorek.wojciech.service.CarsService;
 public class App {
     public static void main(String[] args) {
 
-        String carsJsonFile = "cars.json";
-        CarsService carsService = new CarsService(carsJsonFile);
+        String carsJsonFile = "./resources/data/cars.json";
 
+        CarsService carsService = new CarsService(carsJsonFile);
         MenuService menuService = new MenuService(carsService);
+
     }
 }

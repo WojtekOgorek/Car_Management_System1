@@ -74,7 +74,8 @@ public class UserDataService {
         System.out.println(message);
 
         var counter = new AtomicInteger(1);
-        Arrays.stream(Color.values())
+        Arrays
+                .stream(Color.values())
                 .forEach(color -> System.out.println(counter.getAndIncrement() + ". " + color));
         var option = UserDataService.getInt("Pick color");
         if(option < 1 || option > Color.values().length){

@@ -1,5 +1,6 @@
 package ogorek.wojciech.service;
 
+import lombok.experimental.UtilityClass;
 import ogorek.wojciech.persistance.exception.AppException;
 
 import ogorek.wojciech.persistance.model.enums.Color;
@@ -14,12 +15,15 @@ import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@UtilityClass
 public class RandomDataService {
 
     private Random rnd = new Random();
     private final int NUMBER_OF_COMPONENTS = 9;
-    private Set<String> modelsFromJsonFile = getModelsFromJson("models.json");
-    private Set<String> componentsFromJsonFile = getComponentsFromJson("components.json");
+    private final String MODELS = "models.json";
+    private final String COMPONENTS = "components.json";
+    private Set<String> modelsFromJsonFile = getModelsFromJson(MODELS);
+    private Set<String> componentsFromJsonFile = getComponentsFromJson(COMPONENTS);
 
 
     public double randomMileage() {
