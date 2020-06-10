@@ -13,15 +13,16 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Random;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
-@UtilityClass
+
 public class RandomDataService {
 
     private Random rnd = new Random();
     private final int NUMBER_OF_COMPONENTS = 9;
-    private final String MODELS = "models.json";
-    private final String COMPONENTS = "components.json";
+    private final String MODELS = "./resources/data/models.json";
+    private final String COMPONENTS = "./resources/data/components.json";
     private Set<String> modelsFromJsonFile = getModelsFromJson(MODELS);
     private Set<String> componentsFromJsonFile = getComponentsFromJson(COMPONENTS);
 
@@ -48,15 +49,16 @@ public class RandomDataService {
     public Set<String> getModelsFromJson(String jsonFilename) {
 
         var modelsValidator = new ModelValidator();
+        var counter = new AtomicInteger(1);
 
         return new ModelConverter(jsonFilename)
                 .fromJson()
                 .orElseThrow(() -> new AppException("Random models data service - cannot read data from json file"))
                 .stream()
-                .filter(component -> {
-                    var errors = modelsValidator.validate(component);
+                .filter(model -> {
+                    var errors = modelsValidator.validate(model);
                     if (modelsValidator.hasErrors()) {
-                        System.out.println("\n-------------- validation errors for component random model ----------: " + component);
+                        System.out.println("\n-------------- validation errors for random model nr." + counter.getAndIncrement() + ". " + model + "--------------");
                     }
                     return !modelsValidator.hasErrors();
                 }).collect(Collectors.toSet());
@@ -66,6 +68,7 @@ public class RandomDataService {
     public Set<String> getComponentsFromJson(String jsonFilename) {
 
         var componentValidator = new ComponentValidator();
+        var counter = new AtomicInteger(1);
 
         return new ComponentConverter(jsonFilename)
                 .fromJson()
@@ -74,7 +77,7 @@ public class RandomDataService {
                 .filter(component -> {
                     var errors = componentValidator.validate(component);
                     if (componentValidator.hasErrors()) {
-                        System.out.println("\n-------------- validation errors for component random model ----------: " + component);
+                        System.out.println("\n-------------- validation errors for random component nr." + counter.getAndIncrement() + ". " + component + "--------------");
                     }
                     return !componentValidator.hasErrors();
                 }).collect(Collectors.toSet());
