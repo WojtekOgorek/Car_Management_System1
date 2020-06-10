@@ -1,5 +1,6 @@
 package ogorek.wojciech.service;
 
+import com.google.gson.internal.bind.util.ISO8601Utils;
 import lombok.experimental.UtilityClass;
 import ogorek.wojciech.persistance.exception.AppException;
 
@@ -58,8 +59,11 @@ public class RandomDataService {
                 .filter(model -> {
                     var errors = modelsValidator.validate(model);
                     if (modelsValidator.hasErrors()) {
-                        System.out.println("\n-------------- validation errors for random model nr." + counter.getAndIncrement() + ". " + model + "--------------");
+                        System.out.println("\n-------------- validation errors for random model nr." + counter.get());
+                        errors.forEach((k,v) -> System.out.println(k + ": " + v));
+                        System.out.println("\n\n");
                     }
+                    counter.incrementAndGet();
                     return !modelsValidator.hasErrors();
                 }).collect(Collectors.toSet());
 
@@ -77,8 +81,11 @@ public class RandomDataService {
                 .filter(component -> {
                     var errors = componentValidator.validate(component);
                     if (componentValidator.hasErrors()) {
-                        System.out.println("\n-------------- validation errors for random component nr." + counter.getAndIncrement() + ". " + component + "--------------");
+                        System.out.println("\n-------------- validation errors for random component nr." + counter.get());
+                        errors.forEach((k,v) -> System.out.println(k + ": " + v));
+                        System.out.println("\n\n");
                     }
+                    counter.incrementAndGet();
                     return !componentValidator.hasErrors();
                 }).collect(Collectors.toSet());
     }
