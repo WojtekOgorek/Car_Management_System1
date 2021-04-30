@@ -1,0 +1,94 @@
+[
+  {
+    "model": "BMW",
+    "price": 120,
+    "color": "BLACK",
+    "mileage": 1500,
+    "components": [
+      "ABS",
+      "ALLOY WHEELS"
+    ]
+  },
+  {
+    "model": "MAZDA",
+    "price": 2160,
+    "color": "WHITE",
+    "mileage": 2500,
+    "components": [
+      "AIR CONDITIONING",
+      "BLUETOOTH"
+    ]
+  },
+  {
+    "model": "MERCEDES",
+    "price": 2120,
+    "color": "SILVER",
+    "mileage": 1000,
+    "components": [
+      "ELECTRIC MIRRORS",
+      "ABS"
+    ]
+  },
+  {
+    "model": "TOYOTA",
+    "price": 3230,
+    "color": "BLUE",
+    "mileage": 1110,
+    "components": [
+      "ELECTRIC MIRRORS",
+      "ABS",
+      "AC"
+    ]
+  },
+  {
+    "model": "HONDA",
+    "price": 2120,
+    "color": "BLACK",
+    "mileage": 300,
+    "components": [
+      "ELECTRIC MIRRORS",
+      "ABS"
+    ]
+  },
+  {
+    "model": "KIA",
+    "price": 2666,
+    "color": "RED",
+    "mileage": 20002,
+    "components": [
+      "ELECTRIC MIRRORS",
+      "ABS"
+    ]
+  },
+  {
+    "model": "AUDI",
+    "price": 2220,
+    "color": "WHITE",
+    "mileage": 1300,
+    "components": [
+      "ELECTRIC MIRRORS",
+      "ABS"
+    ]
+  },
+  {
+    "model": "MERCEDES",
+    "price": 220,
+    "color": "SILVER",
+    "mileage": 1000,
+    "components": [
+      "ELECTRIC MIRRORS",
+      "ABS"
+    ]
+  },
+  {
+    "model": "SUZUKI",
+    "price": 22044,
+    "color": "SILVER",
+    "mileage": 10000,
+    "components": [
+      "ELECTRIC MIRRORS",
+      "ABS"
+    ]
+  }
+]
+

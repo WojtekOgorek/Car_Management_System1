@@ -1,0 +1,35 @@
+[
+  {
+    "model": "KIA",
+    "price": 5515,
+    "color": "SILVER",
+    "mileage": 7192.0,
+    "components": [
+      "ABS",
+      "DVD",
+      "BLUETOOTH"
+    ]
+  },
+  {
+    "model": "MERCEDES",
+    "price": 6568,
+    "color": "SILVER",
+    "mileage": 5408.0,
+    "components": [
+      "ABS",
+      "DVD",
+      "BLUETOOTH"
+    ]
+  },
+  {
+    "model": "MERCEDES",
+    "price": 6676,
+    "color": "WHITE",
+    "mileage": 287.0,
+    "components": [
+      "ABS",
+      "DVD",
+      "BLUETOOTH"
+    ]
+  }
+]

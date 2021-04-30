@@ -9,6 +9,7 @@ public class App {
 
         CarsService carsService = new CarsService(carsJsonFile);
         MenuService menuService = new MenuService(carsService);
+        menuService.mainMenu();
 
     }
 }
