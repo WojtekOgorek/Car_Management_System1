@@ -59,7 +59,7 @@ public class CarsService {
                 .collect(Collectors.joining("\n"));
     }
 
-    //method 1. Sort Car by COLOR, MILEAGE, MODEL -> descending or ascending
+    //method 2. Sort Car by COLOR, MILEAGE, MODEL -> descending or ascending
 
     public List<Car> sort(SortItem sortItem, boolean descending) {
 
@@ -81,7 +81,7 @@ public class CarsService {
         return sortedCars;
     }
 
-    //method 2. Get all cars with mileage grater than given argument.
+    //method 3. Get all cars with mileage grater than given argument.
 
     public List<Car> getAllWithMileageGreaterThan(double mileage) {
 
@@ -95,7 +95,7 @@ public class CarsService {
                 .collect(Collectors.toList());
     }
 
-    //method 3. Count cars by colors.
+    //method 4. Count cars by colors.
 
     public Map<Color, Long> countCarsByColors() {
         return
@@ -108,7 +108,7 @@ public class CarsService {
 
     }
 
-    //method 4. Summarizing price and mileage statisctics
+    //method 5. Summarizing price and mileage statisctics
 
     public Statistics summarizeMileageAndPrice() {
 
@@ -134,7 +134,7 @@ public class CarsService {
                 .build();
     }
 
-    //method 5. Sorting car components
+    //method 6. Sorting car components
 
     public List<Car> sortCarComponents() {
         return cars
@@ -146,12 +146,12 @@ public class CarsService {
                 .collect(Collectors.toList());
 
     }
-    //method 6. Map - key is the car model and value is the most valuable car by this model.
+    //method 7. Map - key is the car model and value is the most valuable car by this model.
     //sorted descending by key
 
-    public Map<String, List<Car>> highestPriceCarModel(){
+    public Map<String, BigDecimal> highestPriceCarModel(){
 
-        return cars
+      return cars
                 .stream()
                 .collect(Collectors.groupingBy(Car::getModel))
                 .entrySet()
@@ -165,11 +165,11 @@ public class CarsService {
                                 .stream()
                         .max(Comparator.comparing(Map.Entry::getKey))
                         .orElseThrow()
-                        .getValue()
+                        .getKey()
                 ));
     }
 
-    //method 7. Method returns car with the highest price. If there are more than one
+    //method 8. Method returns car with the highest price. If there are more than one
     //highest priced cars it returns collection of those
 
     public List<Car> highestPricedCar(){
@@ -184,7 +184,7 @@ public class CarsService {
                 .collect(Collectors.toList());
     }
 
-    //method 8. Method return map where key is car component and value is car collection that
+    //method 9. Method return map where key is car component and value is car collection that
     //contain those components. Map is sorted descending by value
 
     public Map<String, List<Car>> carWithSameComponents(){
@@ -200,7 +200,7 @@ public class CarsService {
     }
 
 
-    //method 9. Method return car collection which price fits in the selected range <a, b>.
+    //method 10. Method return car collection which price fits in the selected range <a, b>.
     //Collection is sorted alphabetically
 
     public List<Car> carsPriceRange(int a, int b){

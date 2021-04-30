@@ -13,8 +13,10 @@ import ogorek.wojciech.service.CarsService;
 import ogorek.wojciech.service.DataGenerator;
 import ogorek.wojciech.service.utils.UserDataService;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RequiredArgsConstructor
 public class MenuService {
@@ -98,7 +100,7 @@ public class MenuService {
     }
 
     private void option7(){
-        Map<String, List<Car>> highestPriceCarModel = carsService.highestPriceCarModel();
+        Map<String, BigDecimal> highestPriceCarModel = carsService.highestPriceCarModel();
         System.out.println(toJson(highestPriceCarModel));
     }
     private void option8(){
