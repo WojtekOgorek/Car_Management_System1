@@ -8,6 +8,7 @@ Use maven -> [link](https://maven.apache.org/download.cgi) <- to install car man
 
 
 ```bash
+#main folder
 mvn clean install
 #go to ui folder 
 cd ui
