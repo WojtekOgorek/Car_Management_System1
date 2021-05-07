@@ -5,7 +5,7 @@ import ogorek.wojciech.service.CarsService;
 public class App {
     public static void main(String[] args) {
 
-        String carsJsonFile = "./resources/data/cars.json";
+        String carsJsonFile = "<filepath_to_resources>/cars.json";
 
         CarsService carsService = new CarsService(carsJsonFile);
         MenuService menuService = new MenuService(carsService);

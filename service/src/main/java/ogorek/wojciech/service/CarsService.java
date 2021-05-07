@@ -112,8 +112,8 @@ public class CarsService {
 
     public Statistics summarizeMileageAndPrice() {
 
-        DoubleSummaryStatistics mileageStatistics = cars.stream().collect(Collectors.summarizingDouble(mileage -> mileage.getMileage()));
-        BigDecimalSummaryStatistics priceStatistics = cars.stream().collect(Collectors2.summarizingBigDecimal(price -> price.getPrice()));
+        DoubleSummaryStatistics mileageStatistics = cars.stream().collect(Collectors.summarizingDouble(Car::getMileage));
+        BigDecimalSummaryStatistics priceStatistics = cars.stream().collect(Collectors2.summarizingBigDecimal(Car::getPrice));
 
         Statistic<Double> mileageStatisctic = Statistic.<Double>builder()
                 .min(mileageStatistics.getMin())
@@ -163,7 +163,7 @@ public class CarsService {
                         .collect(Collectors.groupingBy(Car::getPrice))
                         .entrySet()
                                 .stream()
-                        .max(Comparator.comparing(Map.Entry::getKey))
+                        .max(Map.Entry.comparingByKey())
                         .orElseThrow()
                         .getKey()
                 ));

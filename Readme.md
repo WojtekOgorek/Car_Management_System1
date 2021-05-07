@@ -4,7 +4,7 @@ Car management system is a simple multi-module java application to show how you 
 
 ## Installation
 
-Use maven -> [link](https://maven.apache.org/download.cgi) <- to install car management system 1.
+Use maven -> [link](https://maven.apache.org/download.cgi) <- to install car management system 1.You need to add file paths to json paths to the filename variables.
 
 
 ```bash
