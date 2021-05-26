@@ -21,45 +21,6 @@ java -jar ui.jar
 ## Usage
 
 ```java
-/*
- *  ---------- GATHERING DATA FROM JSON ----------
- * 
- */
-    public class CarsService {
-
-    private final Set<Car> cars;
-
-    public CarsService(String jsonFilename) {
-        cars = readCarsFromJsonfile(jsonFilename);
-    }
-
-    /*
-     * 
-     * @param jsonFilename
-     * @return Set<Car> carsFromJsonAfterValidation
-     *
-     */
-    private Set<Car> readCarsFromJsonfile(String jsonFilename) {
-
-        var carValidator = new CarValidator();
-        var counter = new AtomicInteger(1);
-
-        return new CarsConverter(jsonFilename)
-                .fromJson()
-                .orElseThrow(() -> new JsonAppException("cars service - cannot read data from jsonfile"))
-                .stream()
-                .filter(car -> {
-                    var errors = carValidator.validate(car);
-                    if (carValidator.hasErrors()) {
-                        System.out.println("\n---------- validation errors for car nr." + counter.get() + " --------------");
-                        errors.forEach((k, v) -> System.out.println(k + ": " + v));
-                        System.out.println("\n\n");
-                    }
-                    counter.incrementAndGet();
-                    return !carValidator.hasErrors();
-                }).collect(Collectors.toSet());
-    }
-}
 
 /*
  * ------------- APP OPTIONS IN MENU -------------
@@ -114,36 +75,6 @@ public class MenuService {
         System.out.println("11. Generate/Load car data");
         System.out.println("12. End of app");
         return UserDataService.getInt("Choose option:");
-    }
-
-/*
- * ------------- EXAMPLE OF USAGE -------------
- * ----------------  METHOD 7 -----------------  
- *
- * @param Set<Car> 
- * @return Map<String, BigDecimal> 
- *
- */
-    
-
-    public Map<String, BigDecimal> highestPriceCarModel(){
-
-        return cars
-                .stream()
-                .collect(Collectors.groupingBy(Car::getModel))
-                .entrySet()
-                .stream()
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        v -> v.getValue()
-                                .stream()
-                                .collect(Collectors.groupingBy(Car::getPrice))
-                                .entrySet()
-                                .stream()
-                                .max(Comparator.comparing(Map.Entry::getKey))
-                                .orElseThrow()
-                                .getKey()
-                ));
     }
 }
 ```
